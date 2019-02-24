@@ -10,10 +10,16 @@ namespace BarcodeXlsx
         public string postChars;
         public string sourceFileName;
         public string destinationFileName;
+        public bool enabledVerbose = false;
         public bool enabledProgress = false;
 
         public DecodeArgumentParamaters(string[] args)
         {
+            preChars = "{";
+            postChars = "}";
+            enabledProgress = false;
+            enabledVerbose = false;
+
             bool sourceFlag = false;
             bool destinationFlag = false;
             bool preCharsFlag = false;
@@ -40,6 +46,10 @@ namespace BarcodeXlsx
                 else if (arg == "-progress")
                 {
                     enabledProgress = true;
+                }
+                else if (arg == "-verbose")
+                {
+                    enabledVerbose = true;
                 }
                 else if (sourceFlag)
                 {
