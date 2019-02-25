@@ -2,7 +2,7 @@
   "profiles": {
     "BarcodeXlsx": {
       "commandName": "Project",
-      "commandLineArgs": "-source C:\\Users\\07121\\Desktop\\Book1.xlsx"
+      "commandLineArgs": "-source C:\\Users\\mikah\\Desktop\\Book1.xlsx -verbose"
     }
   }
 }
