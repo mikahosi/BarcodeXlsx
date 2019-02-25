@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BarcodeXlsx": {
+      "commandName": "Project",
+      "commandLineArgs": "-source C:\\Users\\07121\\Desktop\\Book1.xlsx"
+    }
+  }
+}
