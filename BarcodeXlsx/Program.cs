@@ -18,7 +18,14 @@ namespace BarcodeXlsx
         {
             try
             {
+                Console.WriteLine("BarcodeXlsx v0.1");
+
                 DecodeArgumentParamaters param = new DecodeArgumentParamaters(args);
+
+                if (param.enabledVerbose)
+                {
+                    Console.WriteLine("--source {0}", param.sourceFileName);
+                }
 
                 XLWorkbook book = new XLWorkbook(param.sourceFileName);
                 foreach (var sheet in book.Worksheets)
@@ -48,12 +55,14 @@ namespace BarcodeXlsx
                                     try
                                     {
                                         BarcodeLib.Barcode barcode = new BarcodeLib.Barcode();
-                                        barcode.Height = 256;
-                                        barcode.Width = 512;
+                                        barcode.Height = param.imageHeight;
+                                        barcode.Width = param.imageWidht;
                                         barcode.Alignment = BarcodeLib.AlignmentPositions.CENTER;
+                                        barcode.IncludeLabel = param.enabledLabel;
+                                        barcode.LabelPosition = BarcodeLib.LabelPositions.BOTTOMCENTER;
+                                        barcode.LabelFont = new Font(FontFamily.GenericSansSerif, 8);
                                         barcode.BackColor = Color.White;
                                         barcode.ImageFormat = ImageFormat.Bmp;
-                                        barcode.LabelPosition = BarcodeLib.LabelPositions.BOTTOMCENTER;
                                         barcode.Encode(DecodeBarcodeStyle(barcodeType), barcodeValue);
 
                                         MemoryStream tempStream = new MemoryStream();
