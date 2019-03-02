@@ -13,6 +13,7 @@ namespace BarcodeXlsx
         public bool enabledVerbose = false;
         public bool enabledProgress = false;
         public bool enabledLabel = false;
+        public bool enabledRemoveTag = false;
         public int imageWidht = 256;
         public int imageHeight = 64;
 
@@ -59,6 +60,10 @@ namespace BarcodeXlsx
                 else if (arg == "-showlabel")
                 {
                     enabledLabel = true;
+                }
+                else if (arg == "-removetag")
+                {
+                    enabledRemoveTag = true;
                 }
                 else if (arg == "-progress")
                 {
