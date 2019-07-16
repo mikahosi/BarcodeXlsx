@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -12,47 +10,110 @@ using ClosedXML.Excel.Drawings;
 
 using ImageMagick;
 
-using Common;
-
-namespace BarcodeXlsx
+namespace Common
 {
-    class Program
+    public class BarcodeXlsxImporter
     {
-        static void Main(string[] args)
+        public string preChars = "{";
+        public string postChars = "}";
+        public bool enabledVerbose = false;
+        public bool enabledProgress = false;
+        public bool enabledLabel = false;
+        public bool enabledRemoveTag = false;
+        public int imageWidth = 256;
+        public int imageHeight = 64;
+        public int marginHeight = 4;
+        public int marginWidth = 4;
+
+        public BarcodeXlsxImporter()
         {
-            try
+
+        }
+        public void Convert(string sourceFileName)
+        {
+            XLWorkbook book = new XLWorkbook(sourceFileName);
+            Convert(book);
+            book.Save();
+        }
+
+        public void Convert(string sourceFileName, string destFileName)
+        {
+            XLWorkbook book = new XLWorkbook(sourceFileName);
+            Convert(book);
+            book.SaveAs(destFileName);
+        }
+
+        public void Convert(Stream inputStream, Stream outputStream)
+        {
+            XLWorkbook book = new XLWorkbook(inputStream);
+            Convert(book);
+            book.SaveAs(outputStream);
+        }
+
+        public void Convert(XLWorkbook book)
+        {
+            foreach (var sheet in book.Worksheets)
             {
-                Console.WriteLine("BarcodeXlsx v0.1");
-
-                DecodeArgumentParamaters param = new DecodeArgumentParamaters(args);
-
-                if (param.enabledVerbose)
+                foreach (var cell in sheet.Cells())
                 {
-                    Console.WriteLine("--source {0}", param.sourceFileName);
-                }
+                    string cellValue = cell.GetString();
+                    if (cellValue.Length > preChars.Length + postChars.Length)
+                    {
+                        string preChars = cellValue.Substring(0, this.preChars.Length);
+                        string postChears = cellValue.Substring(cellValue.Length - this.postChars.Length);
 
-                BarcodeXlsxImporter barcodeXlsx = new BarcodeXlsxImporter();
-                barcodeXlsx.preChars = param.preChars;
-                barcodeXlsx.postChars = param.postChars;
-                barcodeXlsx.enabledVerbose = param.enabledVerbose;
-                barcodeXlsx.enabledProgress = param.enabledProgress;
-                barcodeXlsx.enabledLabel = param.enabledLabel;
-                barcodeXlsx.enabledRemoveTag = param.enabledRemoveTag;
-                barcodeXlsx.imageWidth = param.imageWidht;
-                barcodeXlsx.imageHeight = param.imageHeight;
+                        if (preChars == this.preChars && postChears == this.postChars)
+                        {
+                            string barcodeData = cellValue.Substring(preChars.Length, cellValue.Length - preChars.Length - postChars.Length);
+                            int delimiterPos = barcodeData.IndexOf(":");
+                            if (delimiterPos > 0)
+                            {
+                                string barcodeType = barcodeData.Substring(0, delimiterPos);
+                                string barcodeValue = barcodeData.Substring(delimiterPos + 1);
 
-                if (param.destinationFileName == null)
-                {
-                    barcodeXlsx.Convert(param.sourceFileName);
+                                try
+                                {
+                                    BarcodeLib.Barcode barcode = new BarcodeLib.Barcode();
+                                    barcode.Height = imageHeight - marginHeight * 2;
+                                    barcode.Width = imageWidth - marginWidth * 2;
+                                    barcode.Alignment = BarcodeLib.AlignmentPositions.CENTER;
+                                    barcode.IncludeLabel = enabledLabel;
+                                    barcode.LabelPosition = BarcodeLib.LabelPositions.BOTTOMCENTER;
+                                    barcode.LabelFont = new Font(FontFamily.GenericSansSerif, 8);
+                                    barcode.BackColor = Color.White;
+                                    barcode.ImageFormat = ImageFormat.Bmp;
+                                    barcode.Encode(DecodeBarcodeStyle(barcodeType), barcodeValue);
+
+                                    MemoryStream tempStream1 = new MemoryStream();
+                                    barcode.EncodedImage.Save(tempStream1, ImageFormat.Png);
+
+                                    tempStream1.Position = 0;
+                                    MagickImage image = new MagickImage(tempStream1);
+                                    image.MatteColor = MagickColors.White;
+                                    image.Frame(marginWidth, marginHeight, 0, 0);
+                                    image.Transparent(MagickColors.White);
+                                    MemoryStream tempStream2 = new MemoryStream();
+                                    image.Write(tempStream2, MagickFormat.Png);
+
+                                    var picture = sheet.AddPicture(tempStream2);
+                                    picture.MoveTo(cell);
+                                    picture.Scale(0.5, true);
+                                    picture.Height = (int)(cell.WorksheetRow().Height / 0.75);
+                                    picture.Width = (int)(cell.WorksheetColumn().Width / 0.118);
+
+                                    if (enabledRemoveTag)
+                                    {
+                                        cell.SetValue("");
+                                    }
+                                }
+                                catch (Exception exp)
+                                {
+                                    Console.Error.WriteLine("{0}", exp.Message);
+                                }
+                            }
+                        }
+                    }
                 }
-                else
-                {
-                    barcodeXlsx.Convert(param.sourceFileName, param.destinationFileName);
-                }
-            }
-            catch (Exception exp)
-            {
-                Console.Error.WriteLine("{0}", exp.Message);
             }
         }
 
@@ -61,7 +122,7 @@ namespace BarcodeXlsx
         /// </summary>
         /// <param name="barcodeStyle"></param>
         /// <returns></returns>
-        static BarcodeLib.TYPE DecodeBarcodeStyle(string barcodeStyle)
+        public BarcodeLib.TYPE DecodeBarcodeStyle(string barcodeStyle)
         {
             BarcodeLib.TYPE barcodeType = BarcodeLib.TYPE.CODE128;
             switch (barcodeStyle.ToUpper())
