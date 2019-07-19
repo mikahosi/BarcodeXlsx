@@ -9,25 +9,39 @@ using Microsoft.AspNetCore.Http;
 
 using barcode.Models;
 
+using Common;
 
 namespace barcode.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        [HttpPost]
+        public IActionResult Index(List<IFormFile> BarcodeSourceFile)
         {
-            if (this.Request.Method == "POST")
+            if (BarcodeSourceFile.Count == 1)
             {
-                foreach (var file in this.Request.Form.Files)
-                {
-                    file.OpenReadStream();
-                }
+                var inputSream = BarcodeSourceFile[0].OpenReadStream();
+                MemoryStream outputStream = new MemoryStream();
+                BarcodeXlsxImporter barcodeXlsx = new BarcodeXlsxImporter();
+                barcodeXlsx.Convert(inputSream, outputStream);
+                outputStream.Seek(0, SeekOrigin.Begin);
+                return File(outputStream, "application/excel", DateTime.Now.ToString("yyyyMMddhhmmss") +  ".xlsx");
             }
 
             return View();
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         public IActionResult Convert()
+        {
+            return View();
+        }
+
+        public IActionResult HowTo()
         {
             return View();
         }
