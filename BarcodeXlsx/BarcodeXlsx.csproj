@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -11,7 +11,7 @@
   <ItemGroup>
     <PackageReference Include="BarcodeLib" Version="2.2.2" />
     <PackageReference Include="ClosedXML" Version="0.94.2" />
-    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="7.14.0.2" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="7.14.1" />
   </ItemGroup>
 
   <ItemGroup>
