@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "How To";}
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    アップロードしたExcelファイル(xlsx)に含まれているバーコードタグ部分にバーコードの画像を埋め込みます。<br />
+    タグには「{EAN13:1234567890123}」のように、バーコードの種類：バーコードのデータを記して、{}で囲みます。<br />
+    タグ部分は「="{EAN13"&A1&"}"」のように式で表現することもできます。<br />
+    <br />
+    <a href="/barcodesample.xlsx">サンプル(barcodesample.xlsx)</a>を用意しました。手元にダウンロードしたExcelファイルを、当サイトにアップロードして動作を確認して下さい。<br />
+    <br />
+    バーコードの種類はEAN13以外にUNSPECIFIED, UPCA, UPCE, UPC_SUPPLEMENTAL_2DIGIT, UPC_SUPPLEMENTAL_5DIGIT,
+    EAN8, Interleaved2of5, Interleaved2of5_Mod10, Standard2of5, Standard2of5_Mod10, Industrial2of5, Industrial2of5_Mod10,
+    CODE39, CODE39Extended, CODE39_Mod43, Codabar, PostNet, BOOKLAND, ISBN, MSI_Mod10, MSI_2Mod10, MSI_Mod11, MSI_Mod11_Mod10, Modified_Plessey,
+    CODE11, USD8, UCC12, UCC13, LOGMARS, CODE128, CODE128A, CODE128B, CODE128C, ITF14, CODE93, TELEPEN, FIM, PHARMACODEを指定できます。<br />
+    <br />
+    アップロードされたExcelファイルの内容がサーバーに保存されることはありません。<br />
+    個人情報など外部に公開する事のできない内容を含むファイルを、サーバーにアップロードしないでください。<br />
+</p>

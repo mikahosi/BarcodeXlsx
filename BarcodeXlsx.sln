@@ -1,20 +1,60 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.329
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarcodeXlsx", "BarcodeXlsx\BarcodeXlsx.csproj", "{0B304859-4BAD-4587-A83A-B9EC64193680}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarcodeXlsx", "BarcodeXlsx\BarcodeXlsx.csproj", "{0B304859-4BAD-4587-A83A-B9EC64193680}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "barcode", "barcode\barcode.csproj", "{93B3605C-AE72-4A18-80E7-9510DC99A07E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{B551F263-1950-4082-AD39-C6581B79AD28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{0B304859-4BAD-4587-A83A-B9EC64193680}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0B304859-4BAD-4587-A83A-B9EC64193680}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B304859-4BAD-4587-A83A-B9EC64193680}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0B304859-4BAD-4587-A83A-B9EC64193680}.Debug|x64.Build.0 = Debug|Any CPU
+		{0B304859-4BAD-4587-A83A-B9EC64193680}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0B304859-4BAD-4587-A83A-B9EC64193680}.Debug|x86.Build.0 = Debug|Any CPU
 		{0B304859-4BAD-4587-A83A-B9EC64193680}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B304859-4BAD-4587-A83A-B9EC64193680}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B304859-4BAD-4587-A83A-B9EC64193680}.Release|x64.ActiveCfg = Release|Any CPU
+		{0B304859-4BAD-4587-A83A-B9EC64193680}.Release|x64.Build.0 = Release|Any CPU
+		{0B304859-4BAD-4587-A83A-B9EC64193680}.Release|x86.ActiveCfg = Release|Any CPU
+		{0B304859-4BAD-4587-A83A-B9EC64193680}.Release|x86.Build.0 = Release|Any CPU
+		{93B3605C-AE72-4A18-80E7-9510DC99A07E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93B3605C-AE72-4A18-80E7-9510DC99A07E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93B3605C-AE72-4A18-80E7-9510DC99A07E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{93B3605C-AE72-4A18-80E7-9510DC99A07E}.Debug|x64.Build.0 = Debug|Any CPU
+		{93B3605C-AE72-4A18-80E7-9510DC99A07E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{93B3605C-AE72-4A18-80E7-9510DC99A07E}.Debug|x86.Build.0 = Debug|Any CPU
+		{93B3605C-AE72-4A18-80E7-9510DC99A07E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93B3605C-AE72-4A18-80E7-9510DC99A07E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93B3605C-AE72-4A18-80E7-9510DC99A07E}.Release|x64.ActiveCfg = Release|Any CPU
+		{93B3605C-AE72-4A18-80E7-9510DC99A07E}.Release|x64.Build.0 = Release|Any CPU
+		{93B3605C-AE72-4A18-80E7-9510DC99A07E}.Release|x86.ActiveCfg = Release|Any CPU
+		{93B3605C-AE72-4A18-80E7-9510DC99A07E}.Release|x86.Build.0 = Release|Any CPU
+		{B551F263-1950-4082-AD39-C6581B79AD28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B551F263-1950-4082-AD39-C6581B79AD28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B551F263-1950-4082-AD39-C6581B79AD28}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B551F263-1950-4082-AD39-C6581B79AD28}.Debug|x64.Build.0 = Debug|Any CPU
+		{B551F263-1950-4082-AD39-C6581B79AD28}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B551F263-1950-4082-AD39-C6581B79AD28}.Debug|x86.Build.0 = Debug|Any CPU
+		{B551F263-1950-4082-AD39-C6581B79AD28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B551F263-1950-4082-AD39-C6581B79AD28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B551F263-1950-4082-AD39-C6581B79AD28}.Release|x64.ActiveCfg = Release|Any CPU
+		{B551F263-1950-4082-AD39-C6581B79AD28}.Release|x64.Build.0 = Release|Any CPU
+		{B551F263-1950-4082-AD39-C6581B79AD28}.Release|x86.ActiveCfg = Release|Any CPU
+		{B551F263-1950-4082-AD39-C6581B79AD28}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
