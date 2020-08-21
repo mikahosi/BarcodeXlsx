@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BarcodeLib" Version="2.2.2" />
-    <PackageReference Include="ClosedXML" Version="0.94.2" />
-    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="7.14.1" />
+    <PackageReference Include="BarcodeLib" Version="2.2.5" />
+    <PackageReference Include="ClosedXML" Version="0.95.3" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="7.21.1" />
   </ItemGroup>
 
 </Project>
